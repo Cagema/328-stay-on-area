@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class MoveDown : MonoBehaviour
 {
-    [SerializeField] float _speed;
+    [SerializeField] GameObject _particlePrefab;
 
     private void Update()
     {
-        transform.Translate((_speed + GameManager.Single.Speed) * Time.deltaTime * Vector3.down);
+        transform.Translate(GameManager.Single.Speed * Time.deltaTime * Vector3.down);
     }
 
     private void FixedUpdate()
     {
-        if (transform.position.y < -GameManager.Single.RightUpperCorner.y - 1.5f)
+        if (transform.position.y < -4)
         {
+            Instantiate(_particlePrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
